@@ -26,6 +26,8 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
+
+      
       
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -60,7 +62,6 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -75,4 +76,8 @@ jobs:
         with:
           app-name: 'Barnita'
           slot-name: 'Production'
-          
+
+      - name: Run Start Script
+        run: |
+          chmod +x start.sh
+          ./start.sh    
